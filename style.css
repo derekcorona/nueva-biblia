@@ -1,0 +1,133 @@
+/*
+      Paleta inspirada en la imagen adjunta por el usuario:
+      cielo celeste (#a8d9de), cartón/arena (#e3c99f),
+      tostado de la oblea (#b9774d), rojo del traje (#b94338)
+      y luces crema (#fff3d2). Los valores hexadecimales se
+      eligieron visualmente a partir de esos colores de la imagen.
+    */
+    :root {
+      color-scheme: light;
+      --sky: #a8d9de;
+      --sand: #e3c99f;
+      --waffle: #b9774d;
+      --tomato: #b94338;
+      --cream: #fff3d2;
+      --ink: #60352c;
+      --shadow: #783a2e;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      min-width: 320px;
+      min-height: 100%;
+      margin: 0;
+    }
+
+    body {
+      min-height: 100svh;
+      overflow: hidden;
+      background: var(--sky);
+      color: var(--ink);
+      font-family: "Fredoka", "Trebuchet MS", sans-serif;
+    }
+
+    .hero {
+      position: relative;
+      display: grid;
+      min-height: 100svh;
+      overflow: hidden;
+      isolation: isolate;
+      place-items: center;
+      background:
+        radial-gradient(ellipse at 50% 45%, rgba(255, 246, 219, .78), transparent 62%),
+        linear-gradient(145deg, #bce2df 0%, var(--sky) 48%, #f0dfbd 100%);
+    }
+
+    /* Fondo suavizado: extiende los colores de la foto a toda la pantalla. */
+    .hero::before {
+      position: absolute;
+      z-index: -2;
+      inset: -24px;
+      content: "";
+      background-image: url("./raes-bg.png");
+      background-position: center;
+      background-size: cover;
+      filter: blur(18px) saturate(.82);
+      opacity: .38;
+      transform: scale(1.04);
+    }
+
+    .hero::after {
+      position: absolute;
+      z-index: -1;
+      inset: 0;
+      content: "";
+      background:
+        linear-gradient(110deg, rgba(255, 248, 228, .54), transparent 58%),
+        linear-gradient(0deg, rgba(61, 45, 34, .10), transparent 28%);
+      pointer-events: none;
+    }
+
+    .hero__image {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center bottom;
+      filter: drop-shadow(0 16px 24px rgba(75, 49, 35, .15));
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .hero__content {
+      position: absolute;
+      /* La imagen adjunta tiene proporción 3:4 y se muestra completa. */
+      top: max(12px, calc(100svh - 133.333vw + 12px));
+      left: max(16px, calc((100vw - 75svh) / 2 + 16px));
+      width: auto;
+      padding: 0;
+    }
+
+    h1 {
+      display: block;
+      margin: 0;
+      color: var(--cream);
+      font-family: "Lilita One", "Fredoka", sans-serif;
+      font-size: clamp(.9rem, 1.7vw, 1.3rem);
+      font-weight: 400;
+      letter-spacing: .035em;
+      line-height: 1;
+      -webkit-text-stroke: .7px var(--shadow);
+      paint-order: stroke fill;
+      text-shadow:
+        1px 1px 0 var(--waffle),
+        2px 2px 0 var(--tomato),
+        3px 3px 0 var(--shadow),
+        4px 5px 0 rgba(74, 43, 35, .25);
+    }
+
+    h1 span {
+      display: inline;
+    }
+
+    @media (max-width: 600px) {
+      .hero__content {
+        top: max(12px, calc(100svh - 133.333vw + 12px));
+        left: max(12px, calc((100vw - 75svh) / 2 + 12px));
+      }
+
+      h1 {
+        font-size: .9rem;
+        -webkit-text-stroke-width: .5px;
+      }
+
+      .hero__image {
+        object-position: center bottom;
+      }
+    }
